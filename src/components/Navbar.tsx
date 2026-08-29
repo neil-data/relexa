@@ -85,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
           <div className="hidden sm:flex items-center gap-4">
             {/* Download Brochure Button - Direct PDF Download */}
             <a
-              href="/brochure.pdf"
+              href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               id="nav-download-brochure-btn"
               className="download-brochure-button group relative inline-flex items-center gap-2 px-4 py-2.5 text-[11px] font-mono tracking-[0.16em] uppercase text-[#0C0E14] bg-gradient-to-r from-[#F4DFB0] via-[#DFBA73] to-[#C8A25D] font-bold transition-all duration-300 hover:shadow-[0_0_20px_rgba(223,186,115,0.4)] hover:brightness-110 active:scale-95 rounded-xs"
@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
           {/* Mobile Menu Toggle Button */}
           <div className="flex items-center gap-3 lg:hidden">
             <a
-              href="/brochure.pdf"
+              href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               className="flex sm:hidden items-center justify-center p-2 text-[#DFBA73] border border-[#DFBA73]/30 rounded-sm"
               aria-label="Download Relexa Exports brochure"
@@ -162,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
 
           <div className="flex flex-col space-y-4 pt-6 border-t border-[#DFBA73]/20">
             <a
-              href="/brochure.pdf"
+              href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               id="mobile-download-brochure-btn"
               className="flex items-center justify-center gap-3 w-full py-3.5 bg-[#DFBA73] text-[#0C0E14] font-mono text-xs tracking-[0.16em] uppercase font-bold rounded-sm shadow-lg"

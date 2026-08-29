@@ -63,9 +63,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <ArrowRight className="w-4 h-4" />
             </MagneticButton>
 
-            {/* Secondary CTA: DOWNLOAD COMPANY BROCHURE → (downloads /brochure.pdf) */}
+            {/* Secondary CTA: DOWNLOAD COMPANY BROCHURE → (downloads /relexa.pdf) */}
             <a
-              href="/brochure.pdf"
+              href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               id="cta-download-brochure-btn"
               data-cursor="cta"

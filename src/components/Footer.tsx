@@ -74,7 +74,7 @@ export const Footer: React.FC<FooterProps> = () => {
               Complete export dossiers, certifications, and product specifications.
             </p>
             <a
-              href="/brochure.pdf"
+              href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               data-cursor="cta"
               aria-label="Download Relexa Exports brochure"
