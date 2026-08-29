@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold: #DFBA73;
+    --gold-light: #F4DFB0;
+    --gold-dark: #A98539;
+    --bg-dark: #0C0E14;
+    --bg-card: #131622;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+}
+
+/* Typography classes */
+.font-display {
+  font-family: 'Space Grotesk', 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-grotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-manrope {
+  font-family: 'Manrope', sans-serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Fluid Hero & Section Display Headings */
+.text-hero-fluid {
+  font-size: clamp(3.2rem, 10vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+
+.text-section-fluid {
+  font-size: clamp(2.5rem, 7.5vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+/* Keyboard accessibility outline */
+:focus-visible {
+  outline: 2px solid #DFBA73 !important;
+  outline-offset: 3px !important;
+}
+
+/* Accessibility: Prefers-Reduced-Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0C0E14;
+}
+::-webkit-scrollbar-thumb {
+  background: #252A3A;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #DFBA73;
+}
+
+/* Editorial effects & masks */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF6E0 0%, #DFBA73 45%, #C8A25D 80%, #E8C888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-subtle {
+  background: linear-gradient(180deg, rgba(223, 186, 115, 0.08) 0%, rgba(223, 186, 115, 0) 100%);
+}
+
+.gold-border {
+  border-color: rgba(223, 186, 115, 0.2);
+}
+
+.gold-border-hover:hover {
+  border-color: rgba(223, 186, 115, 0.5);
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(223, 186, 115, 0.07) 0%, rgba(12, 14, 20, 0) 70%);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(223, 186, 115, 0.35);
+  color: transparent;
+}
+
+.text-stroke-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+  color: transparent;
+}
+
+/* Noise overlay */
+.bg-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
