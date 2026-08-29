@@ -10,8 +10,9 @@ coverage/
 # Generated server artifact (removed by `npm run clean`)
 server.js
 
-# Generated brochure (produced by scripts/generateBrochure.ts / create-brochure.cjs)
-public/brochure.pdf
+# NOTE: public/brochure.pdf is intentionally tracked in git so the live site
+# can serve the "Download Brochure" button. Regenerate it with:
+#   npx tsx scripts/generateBrochure.ts   (or: node scripts/create-brochure.cjs)
 
 # Environment & secrets
 .env
