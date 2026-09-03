@@ -105,7 +105,7 @@ export const Manifesto: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-20 lg:mb-28">
           {/* LEFT: 01 */}
           <div className="lg:col-span-2">
-            <div className="text-5xl sm:text-7xl lg:text-8xl font-display font-black text-[#DFBA73]/30 tracking-tighter">
+            <div className="text-[clamp(2.5rem,10vw,6rem)] sm:text-[clamp(3rem,9vw,8rem)] font-display font-black text-[#DFBA73]/30 tracking-tighter">
               01
             </div>
             <div className="text-[11px] font-mono tracking-[0.25em] text-[#DFBA73] uppercase mt-2">
@@ -123,7 +123,7 @@ export const Manifesto: React.FC = () => {
             </div>
             <h2
               ref={headingRef}
-              className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight uppercase leading-[1.02] text-[#FAF8F5]"
+              className="text-[clamp(1.9rem,6vw,3.75rem)] sm:text-[clamp(2.2rem,5vw,3.75rem)] font-display font-extrabold tracking-tight uppercase leading-[1.02] text-[#F3F4F6]"
             >
               BUILT ON TRUST.
               <br />
@@ -134,7 +134,7 @@ export const Manifesto: React.FC = () => {
           {/* RIGHT: Short Editorial Company Description */}
           <div className="lg:col-span-4 space-y-4 text-xs sm:text-sm text-[#C4C8D6] font-sans font-light leading-relaxed lg:pt-2 border-l border-white/10 lg:pl-8">
             <p>
-              Headquartered in Ahmedabad, India, <strong className="text-white font-medium">Relexa Exports</strong> is an emerging multi-sector export enterprise connecting high-yield manufacturing hubs to international markets.
+              Headquartered in Ahmedabad, India, <strong className="text-[#F3F4F6] font-medium">Relexa Exports</strong> is an emerging multi-sector export enterprise connecting high-yield manufacturing hubs to international markets.
             </p>
             <p>
               Operating across healthcare, frozen nutrition, companion animal nourishment, and heavy metallurgy, our business is founded on continuous quality control, transparent Incoterms, and efficient ocean freight.
@@ -152,8 +152,10 @@ export const Manifesto: React.FC = () => {
           className="relative aspect-[21/9] sm:aspect-[21/8] w-full rounded-sm overflow-hidden border border-[#DFBA73]/30 shadow-2xl mb-24 group"
         >
           <img
-            src="/images/global-logistics.jpg"
+            src="/Relexa_Product_Images/French-Fries-Straight-Cut.jpeg"
             alt="Relexa Exports Global Container Logistics & Maritime Fleet"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-85 group-hover:scale-105 transition-transform duration-700"
             onError={(e) => {
               (e.target as HTMLImageElement).src =
@@ -168,11 +170,11 @@ export const Manifesto: React.FC = () => {
               <div className="text-[10px] font-mono tracking-[0.25em] text-[#DFBA73] uppercase mb-1">
                 INTEGRATED MARITIME EXPORT INFRASTRUCTURE
               </div>
-              <div className="text-lg sm:text-2xl font-display font-bold text-[#FAF8F5]">
+              <div className="text-lg sm:text-2xl font-display font-bold text-[#F3F4F6]">
                 Exporting Excellence from Port Mundra & JNPT to the World
               </div>
             </div>
-            <div className="text-xs font-mono text-neutral-300 bg-[#0C0E14]/85 backdrop-blur-md px-4 py-2 border border-[#DFBA73]/30 rounded-xs">
+            <div className="text-xs font-mono text-[#C4C8D6] bg-[#0C0E14]/85 backdrop-blur-md px-4 py-2 border border-[#DFBA73]/30 rounded-xs">
               AHMEDABAD HQ • COLD-CHAIN • BULK METALLURGY
             </div>
           </div>
@@ -195,10 +197,10 @@ export const Manifesto: React.FC = () => {
                   <div className="text-xs font-mono text-[#DFBA73]/70 group-hover:text-[#DFBA73] font-bold mb-2">
                     {p.num}
                   </div>
-                  <div className="text-xs font-display font-bold text-[#FAF8F5] uppercase tracking-wide mb-1.5">
+                  <div className="text-xs font-display font-bold text-[#F3F4F6] uppercase tracking-wide mb-1.5">
                     {p.title}
                   </div>
-                  <p className="text-[11px] text-[#A0A6B8] font-sans font-light leading-relaxed">
+                  <p className="text-[11px] text-[#C4C8D6] font-sans font-light leading-relaxed">
                     {p.desc}
                   </p>
                 </div>
@@ -213,12 +215,12 @@ export const Manifesto: React.FC = () => {
             <div className="text-xs font-mono tracking-[0.25em] text-[#DFBA73] uppercase mb-2">
               DIVERSIFIED GLOBAL REACH
             </div>
-            <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-[#FAF8F5] uppercase tracking-tight">
+            <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-[#F3F4F6] uppercase tracking-tight">
               FROM HEALTHCARE TO INDUSTRY.
             </h3>
           </div>
 
-          <p className="text-xs sm:text-sm text-neutral-400 font-sans font-light max-w-md">
+          <p className="text-xs sm:text-sm text-[#C4C8D6] font-sans font-light max-w-md">
             Four specialized divisions delivering verified pharmaceutical medicines, IQF frozen nutrition, premium companion feeds, and structural steel.
           </p>
         </div>

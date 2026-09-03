@@ -60,17 +60,4 @@ export interface CertificationItem {
   description: string;
 }
 
-export interface RfqFormData {
-  sector: SectorId;
-  products: string[];
-  containerType: '20ft FCL' | '40ft HC FCL' | '40ft Reefer' | 'Break Bulk / LCL';
-  estimatedVolume: string;
-  destinationCountry: string;
-  destinationPort: string;
-  incoterm: 'FOB (Mundra / JNPT)' | 'CIF' | 'CFR' | 'DDP';
-  companyName: string;
-  contactPerson: string;
-  email: string;
-  phone: string;
-  notes: string;
-}
+

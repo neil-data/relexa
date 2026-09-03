@@ -8,18 +8,37 @@ export const CustomCursor: React.FC = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(true);
 
   const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorTypeRef = useRef<CursorType>('default');
   const posRef = useRef({ x: -100, y: -100 });
   const targetPosRef = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
-    // Check if device has touch primary
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Check if device has touch primary, reduced motion, or mobile/tablet viewport
+    const checkIsTouchOrMobile = () => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      return (
+        prefersReduced ||
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(hover: none) and (pointer: coarse)').matches ||
+        window.innerWidth < 1024
+      );
+    };
+
+    const isTouch = checkIsTouchOrMobile();
     setIsTouchDevice(isTouch);
     if (isTouch) return;
 
+    const handleResize = () => {
+      if (checkIsTouchOrMobile()) {
+        setIsTouchDevice(true);
+      }
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
     const handleMouseMove = (e: MouseEvent) => {
       targetPosRef.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      setIsVisible((prev) => (!prev ? true : prev));
     };
 
     const handleMouseLeave = () => {
@@ -43,6 +62,13 @@ export const CustomCursor: React.FC = () => {
     };
     animationFrameId = requestAnimationFrame(render);
 
+    const updateType = (newType: CursorType) => {
+      if (cursorTypeRef.current !== newType) {
+        cursorTypeRef.current = newType;
+        setCursorType(newType);
+      }
+    };
+
     // Event delegation for contextual hover states
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -52,20 +78,20 @@ export const CustomCursor: React.FC = () => {
       if (cursorTarget) {
         const val = cursorTarget.getAttribute('data-cursor') as CursorType;
         if (val === 'view' || val === 'explore' || val === 'cta') {
-          setCursorType(val);
+          updateType(val);
           return;
         }
       }
 
       // Check contextual elements
       if (target.closest('button') || target.closest('a') || target.tagName === 'BUTTON' || target.tagName === 'A') {
-        setCursorType('cta');
+        updateType('cta');
       } else if (target.tagName === 'IMG' || target.closest('.cursor-view')) {
-        setCursorType('view');
+        updateType('view');
       } else if (target.closest('.cursor-explore')) {
-        setCursorType('explore');
+        updateType('explore');
       } else {
-        setCursorType('default');
+        updateType('default');
       }
     };
 
@@ -75,20 +101,21 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isVisible]);
+  }, []);
 
   if (isTouchDevice) return null;
 
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-[width,height,background-color,border-color,opacity] duration-200 ease-out flex items-center justify-center font-mono select-none ${
+      className={`relexa-cursor fixed top-0 left-0 pointer-events-none z-[9999] transition-[width,height,background-color,border-color,opacity] duration-200 ease-out flex items-center justify-center font-mono select-none ${
         !isVisible ? 'opacity-0' : 'opacity-100'
       } ${
         cursorType === 'default'

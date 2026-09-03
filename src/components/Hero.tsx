@@ -8,10 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
   onExploreClick: () => void;
-  onOpenRfqModal: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) => {
+export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -127,8 +126,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
       >
         <img
           ref={imageRef}
-          src="/images/hero-port.jpg"
+          src="/background.png"
           alt="International container port logistics and global freight shipping"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center filter brightness-65 contrast-110 saturate-90"
           onError={(e) => {
             // Fallback to high-res CDN if local load issues
@@ -137,10 +138,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
           }}
         />
 
-        {/* Multi-layered cinematic gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E14] via-[#0C0E14]/60 to-[#0C0E14]/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(12,14,20,0.85)_100%)]" />
-        <div className="absolute inset-0 bg-noise opacity-30" />
+        {/* Multi-layered cinematic gradient overlays — softened navy to keep image visible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E14] via-[#0C0E14]/40 to-[#0C0E14]/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(12,14,20,0.5)_100%)]" />
+        <div className="absolute inset-0 bg-noise opacity-20" />
       </div>
 
       {/* Decorative Grid Lines */}
@@ -171,7 +172,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
         {/* Huge Headline: RELEXA EXPORTS */}
         <h1
           ref={headlineRef}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold tracking-tight text-[#FAF8F5] leading-[0.92] uppercase mb-6 sm:mb-8"
+          className="text-[clamp(2.5rem,9vw,7rem)] sm:text-[clamp(3rem,8vw,6.5rem)] lg:text-[clamp(4rem,7vw,7.5rem)] font-display font-extrabold tracking-tight text-[#FAF8F5] leading-[0.92] uppercase mb-6 sm:mb-8"
         >
           RELEXA
           <br />
@@ -183,7 +184,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
           <div className="lg:col-span-7">
             <p
               ref={statementRef}
-              className="text-2xl sm:text-3xl lg:text-4xl font-display font-light text-[#E5C583] leading-snug tracking-tight mb-4"
+              className="text-[clamp(1.5rem,4.5vw,2.25rem)] sm:text-[clamp(1.75rem,4vw,2.75rem)] lg:text-4xl font-display font-light text-[#E5C583] leading-snug tracking-tight mb-4"
             >
               Connecting quality with global markets.
             </p>
@@ -201,7 +202,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
               type="button"
               onClick={onExploreClick}
               id="hero-explore-worlds-btn"
-              className="group inline-flex items-center justify-between px-6 py-4 bg-[#131622]/90 hover:bg-[#1A1E2E] border border-[#DFBA73]/30 hover:border-[#DFBA73] text-[#F3F4F6] transition-all duration-300 rounded-sm shadow-xl"
+              className="group inline-flex items-center justify-between px-6 py-4 bg-[#131622]/90 hover:bg-[#131622] border border-[#DFBA73]/30 hover:border-[#DFBA73] text-[#F3F4F6] transition-all duration-300 rounded-sm shadow-xl"
             >
               <div className="flex items-center gap-3">
                 <Compass className="w-5 h-5 text-[#DFBA73] transition-transform duration-500 group-hover:rotate-90" />
@@ -210,16 +211,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onOpenRfqModal }) =>
                 </span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#DFBA73] transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-
-            <button
-              type="button"
-              onClick={onOpenRfqModal}
-              id="hero-request-quote-btn"
-              className="inline-flex items-center justify-between px-6 py-3.5 bg-gradient-to-r from-[#DFBA73] to-[#C8A25D] text-[#0C0E14] font-mono text-xs tracking-[0.16em] uppercase font-bold hover:brightness-110 active:scale-98 transition-all rounded-sm shadow-lg"
-            >
-              <span>INSTANT TRADE INQUIRY</span>
-              <ShieldCheck className="w-4 h-4" />
             </button>
           </div>
         </div>

@@ -10,9 +10,9 @@ export const SECTORS: SectorDetail[] = [
     tagline: 'High-purity formulations engineered for stringent international pharmacopeias.',
     description: 'Supplying finished pharmaceutical dosages, active pharmaceutical ingredients (APIs), sterile injectables, and high-precision dental instruments across global hospital networks.',
     fullNarrative: 'Operating within world-class cGMP and US-FDA inspected facilities, Relexa Healthcare exports comprehensive therapeutic lines. From oncology and cardiovascular therapies to precision diamond rotary burs and biocompatible impression silicones, every consignment undergoes rigorous chromatographic validation.',
-    heroImage: '/images/healthcare.jpg',
+    heroImage: '/Relexa_Product_Images/Rabez-D.jpeg',
     fallbackImage: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1600&auto=format&fit=crop',
-    secondaryImage: '/images/dental-care.jpg',
+    secondaryImage: '/Relexa_Product_Images/Devdent-D.jpeg',
     accentColor: '#5EA7DB',
     metrics: [
       { label: 'Purity Benchmark', value: '99.98%', sublabel: 'HPLC HPLC Assayed' },
@@ -39,9 +39,9 @@ export const SECTORS: SectorDetail[] = [
     tagline: 'Farm-fresh harvest locked at -38°C Individual Quick Freezing (IQF).',
     description: 'Cultivated in Gujarat and Punjab fertile farm belts and processed within hours of harvest to preserve original moisture, cellular structure, crispness, and nutrient density.',
     fullNarrative: 'Relexa Frozen Foods leads export cold-chains for international Quick Service Restaurant (QSR) chains and gourmet food distributors. Our flagship 6mm, 9mm, and 11mm cut French Fries deliver uniform golden crispness, low oil absorption, and consistent solid content year-round.',
-    heroImage: '/images/french-fries.jpg',
+    heroImage: '/Relexa_Product_Images/French-Fries-Straight-Cut.jpeg',
     fallbackImage: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=1600&auto=format&fit=crop',
-    secondaryImage: '/images/frozen-food.jpg',
+    secondaryImage: '/Relexa_Product_Images/Coated-Flavoured-Fries.jpeg',
     accentColor: '#E29A38',
     metrics: [
       { label: 'Freezing Core Temp', value: '-38°C', sublabel: 'IQF Blast Tunnel Velocity' },
@@ -68,9 +68,9 @@ export const SECTORS: SectorDetail[] = [
     tagline: 'Formulated with animal nutritionists for vitality, gut health, and longevity.',
     description: 'Crafted with single-source animal proteins, whole superfoods, probiotics, and zero synthetic preservatives to nourish companion animals worldwide.',
     fullNarrative: 'Relexa Pet Nutrition approaches canine and feline vitality with the same rigorous scientific standards as human pharmaceuticals. Our extruded kibbles, dehydrated single-ingredient meat jerkies, and veterinary functional supplements are free from corn, wheat, artificial colorings, and by-product meals.',
-    heroImage: '/images/pet-nutrition.jpg',
+    heroImage: '/Relexa_Product_Images/Dog-Food.jpeg',
     fallbackImage: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?q=80&w=1600&auto=format&fit=crop',
-    secondaryImage: '/images/dog-food.jpg',
+    secondaryImage: '/Relexa_Product_Images/Cat-Food.jpeg',
     accentColor: '#D97757',
     metrics: [
       { label: 'Protein Content', value: '32-38%', sublabel: 'Single-Source Meat Proteins' },
@@ -97,9 +97,9 @@ export const SECTORS: SectorDetail[] = [
     tagline: 'High-tensile structural and flat carbon steel engineered for mega-infrastructure.',
     description: 'Heavy metallurgical exports meeting strict ASTM, EN, and JIS standards. Direct vessel loading from Port Mundra with full Mill Test Certificates (EN 10204 3.1).',
     fullNarrative: 'From hot-rolled steel coils and cold-rolled precision sheets to galvanized coils, universal H-beams, and seamless line pipes, Relexa Steel powers major civil engineering, shipbuilding, renewable energy, and heavy fabrication projects across four continents.',
-    heroImage: '/images/steel.jpg',
+    heroImage: '/Relexa_Product_Images/HR-Coil.jpeg',
     fallbackImage: 'https://images.unsplash.com/photo-1535813547-99c456a41d4a?q=80&w=1600&auto=format&fit=crop',
-    secondaryImage: '/images/steel-coil.jpg',
+    secondaryImage: '/Relexa_Product_Images/Flat-Bar.jpeg',
     accentColor: '#9CA3AF',
     metrics: [
       { label: 'Tensile Strength', value: 'Up to 700 MPa', sublabel: 'High-Yield Structural Grades' },
@@ -126,7 +126,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'RABEZ - D (Rabeprazole & Domperidone SR Capsules)',
     category: 'Gastroenterology',
-    image: '/images/healthcare.jpg',
+    image: '/Relexa_Product_Images/Rabez-D.jpeg',
     description: 'Rabeprazole Sodium IP 20mg (EC) & Domperidone IP 30mg (SR) for rapid relief of GERD, hyperacidity, and gastric reflux.',
     specs: {
       'Active Ingredients': 'Rabeprazole Na 20mg + Domperidone 30mg SR',
@@ -144,7 +144,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'FERO + D3 (Calcium, Vitamin D3 & Methylcobalamin)',
     category: 'Nutraceuticals & Hematinics',
-    image: '/images/pharmaceutical-lab.jpg',
+    image: '/Relexa_Product_Images/Fero-D3.jpeg',
     description: 'Advanced hematinic and osteo-vitality complex enriched with Calcium Carbonate, Vitamin D3, Methylcobalamin, and L-Methylfolate.',
     specs: {
       'Composition': 'Calcium + Vit D3 + Methylcobalamin + L-Methylfolate',
@@ -162,7 +162,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'DVAAND - P (Diclofenac Sodium & Paracetamol Tablets)',
     category: 'Analgesics & Anti-Inflammatory',
-    image: '/images/healthcare.jpg',
+    image: '/Relexa_Product_Images/Rabez-D.jpeg',
     description: 'High-efficacy dual-action pain relief formulation for musculoskeletal disorders, acute trauma, and post-operative pain management.',
     specs: {
       'Active Ingredients': 'Diclofenac Sodium 50mg + Paracetamol 325mg',
@@ -180,7 +180,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'REALVITA (Omega 3, Ginseng, Multivitamins & Minerals)',
     category: 'Vitality & Immunity',
-    image: '/images/pharmaceutical-lab.jpg',
+    image: '/Relexa_Product_Images/Fero-D3.jpeg',
     description: 'Premium soft gelatin capsule containing Korean Ginseng extract, high-EPA/DHA Omega-3 fatty acids, 12 essential vitamins, and trace minerals.',
     specs: {
       'Form': 'Soft Gelatin Capsules',
@@ -198,7 +198,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'DEVDENT-D (Medicated Toothpaste & Desensitizing Gel)',
     category: 'Dental Care',
-    image: '/images/dental-care.jpg',
+    image: '/Relexa_Product_Images/Devdent-D.jpeg',
     description: 'Clinically proven desensitizing oral care formulation with Potassium Nitrate, Sodium Monofluorophosphate, and Triclosan.',
     specs: {
       'Active Actives': 'Potassium Nitrate 5% w/w + SMFP 0.7% w/w + Triclosan',
@@ -216,7 +216,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'healthcare',
     name: 'DSENS PASTE & MOCPAIN Dental Care Series',
     category: 'Dental Care & Analgesic Gel',
-    image: '/images/dental-care.jpg',
+    image: '/Relexa_Product_Images/Devdent-D.jpeg',
     description: '0.4% Stannous Fluoride rapid desensitizing paste paired with MOCPAIN Benzocaine 15g Fast-acting Topical Analgesic Dental Gel.',
     specs: {
       'Dsens Paste': '0.4% Stannous Fluoride Desensitizing Gel',
@@ -236,7 +236,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'frozen-foods',
     name: 'French Fries Straight Cut (9mm / 6mm)',
     category: 'Frozen Foods',
-    image: '/images/french-fries.jpg',
+    image: '/Relexa_Product_Images/French-Fries-Straight-Cut.jpeg',
     description: 'Grade A high-solids potato fries with golden crisp exterior, fluffy interior, low oil absorption, and consistent length distribution.',
     specs: {
       'Cut Size': '9mm x 9mm Straight Cut (Also available in 6mm Shoestring)',
@@ -254,7 +254,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'frozen-foods',
     name: 'Crinkle Fries (IQF Golden Ridged Cut)',
     category: 'Frozen Foods',
-    image: '/images/french-fries.jpg',
+    image: '/Relexa_Product_Images/French-Fries-Straight-Cut.jpeg',
     description: 'Distinctive corrugated ridged-cut fries providing maximum surface crispness and exceptional sauce dipping hold for international QSRs.',
     specs: {
       'Cut Size': '10mm x 10mm / 11mm Ridged Crinkle',
@@ -272,7 +272,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'frozen-foods',
     name: 'Coated Flavoured Fries (Herb & Peri-Peri Seasoned)',
     category: 'Frozen Foods',
-    image: '/images/frozen-food.jpg',
+    image: '/Relexa_Product_Images/Coated-Flavoured-Fries.jpeg',
     description: 'Crispy batter-coated seasoned potato fries that maintain stay-crisp warmth for up to 30 minutes, ideal for delivery & takeaways.',
     specs: {
       'Coating Type': 'Clear-coat / Herb & Spiced Crunch Batter',
@@ -290,7 +290,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'frozen-foods',
     name: 'Aloo Tikki & Chilli Garlic Shotz (IQF Appetizers)',
     category: 'Frozen Foods',
-    image: '/images/frozen-food.jpg',
+    image: '/Relexa_Product_Images/Coated-Flavoured-Fries.jpeg',
     description: 'Authentic spiced potato patties and bite-sized spicy garlic poppers, crafted with natural herbs, fresh chillies, and crispy breadcrumb coating.',
     specs: {
       'Aloo Tikki Piece Wt': '40g / 50g per Patty',
@@ -310,7 +310,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'pet-nutrition',
     name: 'Dog Food (Complete Nutrition Grain-Free Recipe)',
     category: 'Pet Nutrition',
-    image: '/images/pet-nutrition.jpg',
+    image: '/Relexa_Product_Images/Dog-Food.jpeg',
     description: 'Complete and balanced canine nourishment formulated with real chicken, lamb, sweet potatoes, and prebiotic fibers for optimal coat and gut health.',
     specs: {
       'Crude Protein': 'Min 32.0%',
@@ -328,7 +328,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'pet-nutrition',
     name: 'Cat Food (Complete Taurine-Enriched Formula)',
     category: 'Pet Nutrition',
-    image: '/images/dog-food.jpg',
+    image: '/Relexa_Product_Images/Cat-Food.jpeg',
     description: 'High-protein feline diet rich in ocean fish, chicken liver, and essential Taurine to support sharp eyesight, healthy cardiac function, and urinary tract health.',
     specs: {
       'Crude Protein': 'Min 36.0%',
@@ -346,7 +346,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'pet-nutrition',
     name: 'Horse Food & Hamster Food (Specialized Animal Diets)',
     category: 'Pet Nutrition',
-    image: '/images/pet-nutrition.jpg',
+    image: '/Relexa_Product_Images/Dog-Food.jpeg',
     description: 'High-energy equine performance feed for sport & working horses alongside clean seed, whole grain, and dehydrated veggie mixes for hamsters.',
     specs: {
       'Horse Feed': 'High-Digestible Fiber, Organic Selenium, Biotin for Hoof Health',
@@ -364,7 +364,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'pet-nutrition',
     name: 'Dog Treats & Cat Treats (Oven-Baked Bacon & Creamy Purees)',
     category: 'Pet Nutrition',
-    image: '/images/dog-food.jpg',
+    image: '/Relexa_Product_Images/Cat-Food.jpeg',
     description: 'Oven-baked naturally delicious bacon biscuits for dogs and creamy lickable puree sticks for cats, crafted with real meat and zero artificial colors.',
     specs: {
       'Dog Treats': 'Oven-Baked Crunchy Bacon & Chicken Biscuits',
@@ -384,7 +384,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'steel',
     name: 'HR Coil (Hot Rolled Coils & Sheets)',
     category: 'Steel Products',
-    image: '/images/steel.jpg',
+    image: '/Relexa_Product_Images/HR-Coil.jpeg',
     description: 'High-tensile hot rolled steel coils meeting international structural and pressure vessel grades with full Mill Test Certificates (EN 10204 3.1).',
     specs: {
       'Width Range': '1000mm to 2000mm',
@@ -402,7 +402,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'steel',
     name: 'Flat Bar (MS Hot Rolled Flat Steel Bars)',
     category: 'Steel Products',
-    image: '/images/steel-fabrication.jpg',
+    image: '/Relexa_Product_Images/MS-Angle.jpeg',
     description: 'Precision hot-rolled mild steel flat bars engineered for engineering fabrication, truck trailers, grating, architectural gates, and machinery frames.',
     specs: {
       'Thickness Range': '3.0mm to 25.0mm',
@@ -420,7 +420,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     sectorId: 'steel',
     name: 'MS Angle (Equal & Unequal Structural Angles)',
     category: 'Steel Products',
-    image: '/images/steel.jpg',
+    image: '/Relexa_Product_Images/HR-Coil.jpeg',
     description: 'Hot-rolled structural steel angles with tight dimensional tolerances for power transmission towers, bridge girders, industrial sheds, and civil engineering.',
     specs: {
       'Size Range': '20x20x3mm up to 200x200x24mm',
@@ -549,7 +549,7 @@ export const COMPANY_FACTS = {
   location: 'Ahmedabad, Gujarat, India',
   fullAddress: 'Shop A-403, Rose Vill Sky, Nikol Naroda Road, Ahmedabad, Gujarat 382330, India',
   email: 'relexaexport@gmail.com',
-  phones: ['+91 98981-16778', '+91 95742-72321'],
-  primaryPhone: '+91 98981-16778',
-  secondaryPhone: '+91 95742-72321'
+  phones: ['+91 95742-72321', '+91 98981-16778'],
+  primaryPhone: '+91 95742-72321',
+  secondaryPhone: '+91 98981-16778'
 };

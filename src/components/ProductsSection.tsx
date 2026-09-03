@@ -1,48 +1,69 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, ArrowUpRight, ChevronDown, ShieldCheck, Check, Sparkles, Filter } from 'lucide-react';
+import { Search, ChevronDown, ShieldCheck, Check, Sparkles, Filter } from 'lucide-react';
 import { PRODUCTS_CATALOG, SECTORS } from '../data/companyData';
 import { SectorId, ProductItem } from '../types';
 
 interface ProductsSectionProps {
   selectedSectorFilter?: SectorId | 'all';
-  onOpenRfqWithProduct: (productName: string, sectorId: SectorId) => void;
 }
 
 export const ProductsSection: React.FC<ProductsSectionProps> = ({
   selectedSectorFilter = 'all',
-  onOpenRfqWithProduct,
 }) => {
   const [activeFilter, setActiveFilter] = useState<SectorId | 'all'>(selectedSectorFilter);
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredProduct, setHoveredProduct] = useState<ProductItem | null>(null);
   const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [previewPos, setPreviewPos] = useState({ x: 0, y: 0 });
   const [selectedProductForModal, setSelectedProductForModal] = useState<ProductItem | null>(null);
+  
   const listRef = useRef<HTMLDivElement>(null);
+  const floatingPreviewRef = useRef<HTMLDivElement>(null);
+  const mousePosRef = useRef({ x: -200, y: -200 });
+  const previewPosRef = useRef({ x: -200, y: -200 });
 
   useEffect(() => {
     setActiveFilter(selectedSectorFilter);
   }, [selectedSectorFilter]);
 
-  // Smooth lerp for cursor-following preview image
+  // High-performance direct DOM RAF loop for cursor-following preview (Zero React re-renders)
   useEffect(() => {
-    let animationFrameId: number;
+    if (!hoveredProduct) return;
 
+    let animationFrameId: number;
     const lerp = () => {
-      setPreviewPos((prev) => ({
-        x: prev.x + (mousePos.x - prev.x) * 0.15,
-        y: prev.y + (mousePos.y - prev.y) * 0.15
-      }));
+      previewPosRef.current.x += (mousePosRef.current.x - previewPosRef.current.x) * 0.18;
+      previewPosRef.current.y += (mousePosRef.current.y - previewPosRef.current.y) * 0.18;
+
+      if (floatingPreviewRef.current) {
+        floatingPreviewRef.current.style.transform = `translate3d(${previewPosRef.current.x + 30}px, ${previewPosRef.current.y}px, 0) translate(-50%, -50%)`;
+      }
       animationFrameId = requestAnimationFrame(lerp);
     };
 
     animationFrameId = requestAnimationFrame(lerp);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [mousePos]);
+  }, [hoveredProduct]);
+
+  // Modal accessibility: Escape key & body scroll locking
+  useEffect(() => {
+    if (!selectedProductForModal) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedProductForModal(null);
+    };
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProductForModal]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
+    mousePosRef.current = { x: e.clientX, y: e.clientY };
   };
 
   const filteredProducts = PRODUCTS_CATALOG.filter((item) => {
@@ -60,18 +81,20 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
       onMouseMove={handleMouseMove}
       className="relative w-full py-24 sm:py-32 bg-[#0C0E14] text-[#F3F4F6] border-t border-[#DFBA73]/15 overflow-hidden"
     >
-      {/* Floating Cursor Preview Image (Desktop Only) */}
+      {/* Floating Cursor Preview Image (Desktop Only - Direct DOM Transform) */}
       {hoveredProduct && (
         <div
-          className="fixed pointer-events-none z-50 hidden lg:block w-72 h-44 rounded-sm overflow-hidden border border-[#DFBA73]/60 shadow-[0_20px_50px_rgba(0,0,0,0.8)] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 backdrop-blur-sm"
+          ref={floatingPreviewRef}
+          className="fixed pointer-events-none z-50 hidden lg:block w-72 h-44 rounded-sm overflow-hidden border border-[#DFBA73]/60 shadow-[0_20px_50px_rgba(0,0,0,0.8)] top-0 left-0 transition-opacity duration-300 backdrop-blur-sm will-change-transform"
           style={{
-            left: `${previewPos.x + 30}px`,
-            top: `${previewPos.y}px`,
+            transform: `translate3d(${previewPosRef.current.x + 30}px, ${previewPosRef.current.y}px, 0) translate(-50%, -50%)`
           }}
         >
           <img
             src={hoveredProduct.image}
             alt={hoveredProduct.name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-95"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E14] via-transparent to-transparent opacity-80" />
@@ -92,7 +115,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                 03 / EDITORIAL PRODUCT SHOWCASE
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight uppercase text-[#FAF8F5]">
+            <h2 className="text-[clamp(1.9rem,6vw,3.75rem)] sm:text-[clamp(2.2rem,5.5vw,3.75rem)] font-display font-extrabold tracking-tight uppercase text-[#F3F4F6]">
               EXPORT SPECIFICATIONS.
             </h2>
           </div>
@@ -117,8 +140,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             onClick={() => setActiveFilter('all')}
             className={`px-4 py-2 text-xs font-mono tracking-[0.16em] uppercase rounded-xs transition-all ${
               activeFilter === 'all'
-                ? 'bg-[#DFBA73] text-[#0C0E14] font-bold shadow-md'
-                : 'bg-[#121520] text-neutral-400 hover:text-white border border-white/5'
+                ? 'bg-[#DFBA73] text-[#FFFFFF] font-bold shadow-md'
+                : 'bg-[#121522] text-neutral-400 hover:text-white border border-white/5'
             }`}
           >
             ALL SECTORS ({PRODUCTS_CATALOG.length})
@@ -130,8 +153,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
               onClick={() => setActiveFilter(sec.id)}
               className={`px-4 py-2 text-xs font-mono tracking-[0.16em] uppercase rounded-xs transition-all ${
                 activeFilter === sec.id
-                  ? 'bg-[#DFBA73] text-[#0C0E14] font-bold shadow-md'
-                  : 'bg-[#121520] text-neutral-400 hover:text-white border border-white/5'
+                  ? 'bg-[#DFBA73] text-[#FFFFFF] font-bold shadow-md'
+                  : 'bg-[#121522] text-neutral-400 hover:text-white border border-white/5'
               }`}
             >
               {sec.title.split('&')[0]}
@@ -152,7 +175,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                 onMouseEnter={() => setHoveredProduct(product)}
                 onMouseLeave={() => setHoveredProduct(null)}
                 className={`group transition-all duration-300 ${
-                  isHovered ? 'bg-[#141828]/60' : 'bg-transparent'
+                  isHovered ? 'bg-[#121522]/60' : 'bg-transparent'
                 }`}
               >
                 {/* Main Interactive Row */}
@@ -166,7 +189,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                     </span>
 
                     <div className="flex-1">
-                      <div className="text-lg sm:text-2xl lg:text-3xl font-display font-bold text-[#FAF8F5] group-hover:text-[#DFBA73] group-hover:translate-x-1.5 transition-all duration-300">
+                      <div className="text-lg sm:text-2xl lg:text-3xl font-display font-bold text-[#F3F4F6] group-hover:text-[#DFBA73] group-hover:translate-x-1.5 transition-all duration-300">
                         {product.name}
                       </div>
                       <div className="text-[11px] font-mono tracking-[0.15em] text-neutral-400 uppercase mt-1">
@@ -178,7 +201,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                   {/* Right Meta & Actions */}
                   <div className="flex items-center justify-between md:justify-end gap-6 sm:gap-10">
                     <div className="text-right hidden sm:block">
-                      <div className="text-xs font-mono text-[#FAF8F5]">
+                      <div className="text-xs font-mono text-[#F3F4F6]">
                         {product.containerCapacity}
                       </div>
                       <div className="text-[10px] font-mono text-neutral-400 uppercase">
@@ -187,18 +210,6 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onOpenRfqWithProduct(product.name, product.sectorId);
-                        }}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#DFBA73]/10 hover:bg-[#DFBA73] border border-[#DFBA73]/30 text-[#DFBA73] hover:text-[#0C0E14] font-mono text-[11px] tracking-[0.14em] uppercase font-bold transition-all rounded-xs"
-                      >
-                        <span>RFQ</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </button>
-
                       <button
                         type="button"
                         onClick={(e) => {
@@ -216,12 +227,14 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
 
                 {/* Expanded In-Line Details (Smooth Accordion for both Desktop & Mobile) */}
                 {isExpanded && (
-                  <div className="px-4 sm:px-10 pb-8 pt-2 bg-[#0E1119]/80 border-t border-white/5 grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in duration-300">
+                  <div className="px-4 sm:px-10 pb-8 pt-2 bg-[#121522]/80 border-t border-white/5 grid grid-cols-1 md:grid-cols-12 gap-6 animate-in fade-in duration-300">
                     <div className="md:col-span-4">
                       <div className="aspect-[16/10] w-full overflow-hidden rounded-xs border border-white/10">
                         <img
                           src={product.image}
                           alt={product.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -229,22 +242,22 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
 
                     <div className="md:col-span-8 flex flex-col justify-between space-y-4">
                       <div>
-                        <p className="text-xs sm:text-sm text-[#C4C8D6] font-sans font-light leading-relaxed mb-4">
+                        <p className="text-xs sm:text-sm text-neutral-400 font-sans font-light leading-relaxed mb-4">
                           {product.description}
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                           {Object.entries(product.specs).map(([key, val]) => (
-                            <div key={key} className="p-2 bg-[#121522] border border-white/5 rounded-xs flex justify-between">
+                            <div key={key} className="p-2 bg-[#0C0E14] border border-white/5 rounded-xs flex justify-between">
                               <span className="text-neutral-400">{key}:</span>
-                              <span className="text-[#FAF8F5] font-semibold">{val}</span>
+                              <span className="text-[#F3F4F6] font-semibold">{val}</span>
                             </div>
                           ))}
-                          <div className="p-2 bg-[#121522] border border-white/5 rounded-xs flex justify-between">
+                          <div className="p-2 bg-[#0C0E14] border border-white/5 rounded-xs flex justify-between">
                             <span className="text-neutral-400">Packaging:</span>
                             <span className="text-[#DFBA73] font-semibold truncate max-w-[140px]">{product.packaging}</span>
                           </div>
-                          <div className="p-2 bg-[#121522] border border-white/5 rounded-xs flex justify-between">
+                          <div className="p-2 bg-[#0C0E14] border border-white/5 rounded-xs flex justify-between">
                             <span className="text-neutral-400">Loading:</span>
                             <span className="text-[#DFBA73] font-semibold truncate max-w-[140px]">{product.containerCapacity}</span>
                           </div>
@@ -254,15 +267,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
                       <div className="flex flex-wrap gap-3 pt-2">
                         <button
                           type="button"
-                          onClick={() => onOpenRfqWithProduct(product.name, product.sectorId)}
-                          className="px-5 py-2.5 bg-[#DFBA73] text-[#0C0E14] font-mono text-xs font-bold tracking-[0.16em] uppercase rounded-xs"
-                        >
-                          REQUEST FORMAL PROFORMA / RFQ
-                        </button>
-                        <button
-                          type="button"
                           onClick={() => setSelectedProductForModal(product)}
-                          className="px-4 py-2.5 border border-white/20 text-neutral-300 hover:text-white font-mono text-xs uppercase rounded-xs"
+                          className="px-4 py-2.5 border border-white/20 text-neutral-400 hover:text-white font-mono text-xs uppercase rounded-xs"
                         >
                           FULL LABORATORY DOSSIER
                         </button>
@@ -291,12 +297,21 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
 
       {/* Product Full Modal */}
       {selectedProductForModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="product-modal-title"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedProductForModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in"
+        >
           <div className="bg-[#121522] border border-[#DFBA73]/40 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 rounded-xs shadow-2xl relative">
             <button
               type="button"
               onClick={() => setSelectedProductForModal(null)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-white text-lg font-mono"
+              aria-label="Close product specifications dialog"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-white text-lg font-mono p-1"
             >
               ✕
             </button>
@@ -304,7 +319,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             <div className="text-xs font-mono tracking-[0.2em] text-[#DFBA73] uppercase mb-2">
               {selectedProductForModal.category} • EXPORT SPECIFICATION
             </div>
-            <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#FAF8F5] mb-4">
+            <h3 id="product-modal-title" className="text-2xl sm:text-3xl font-display font-bold text-[#F3F4F6] mb-4">
               {selectedProductForModal.name}
             </h3>
 
@@ -312,11 +327,13 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
               <img
                 src={selectedProductForModal.image}
                 alt={selectedProductForModal.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            <p className="text-sm text-[#C5C9D6] leading-relaxed mb-6 font-sans font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed mb-6 font-sans font-light">
               {selectedProductForModal.description}
             </p>
 
@@ -327,12 +344,12 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
               {Object.entries(selectedProductForModal.specs).map(([k, v]) => (
                 <div key={k} className="flex justify-between py-1.5 border-b border-white/5 text-xs">
                   <span className="font-mono text-neutral-400">{k}:</span>
-                  <span className="font-sans text-neutral-200 font-medium">{v}</span>
+                  <span className="font-sans text-[#F3F4F6] font-medium">{v}</span>
                 </div>
               ))}
               <div className="flex justify-between py-1.5 border-b border-white/5 text-xs">
                 <span className="font-mono text-neutral-400">Packaging Format:</span>
-                <span className="font-sans text-neutral-200 font-medium">{selectedProductForModal.packaging}</span>
+                <span className="font-sans text-[#F3F4F6] font-medium">{selectedProductForModal.packaging}</span>
               </div>
               <div className="flex justify-between py-1.5 border-b border-white/5 text-xs">
                 <span className="font-mono text-neutral-400">FCL Container Capacity:</span>
@@ -347,19 +364,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/10">
               <button
                 type="button"
-                onClick={() => {
-                  const p = selectedProductForModal;
-                  setSelectedProductForModal(null);
-                  onOpenRfqWithProduct(p.name, p.sectorId);
-                }}
-                className="flex-1 py-3 bg-[#DFBA73] text-[#0C0E14] font-mono text-xs tracking-[0.16em] uppercase font-bold rounded-xs shadow-md"
-              >
-                REQUEST PROFORMA INVOICE
-              </button>
-              <button
-                type="button"
                 onClick={() => setSelectedProductForModal(null)}
-                className="px-6 py-3 border border-white/20 text-neutral-300 font-mono text-xs uppercase rounded-xs"
+                className="px-6 py-3 border border-white/20 text-neutral-400 font-mono text-xs uppercase rounded-xs"
               >
                 CLOSE
               </button>

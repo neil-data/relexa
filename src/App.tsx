@@ -14,21 +14,24 @@ import { LogisticsExperience } from './components/LogisticsExperience';
 import { VisionSection } from './components/VisionSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { InquiryModal } from './components/InquiryModal';
 import { CustomCursor } from './components/CustomCursor';
 import { SectorId } from './types';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const [preloaderFinished, setPreloaderFinished] = useState(false);
-  const [rfqModalOpen, setRfqModalOpen] = useState(false);
-  const [rfqSector, setRfqSector] = useState<SectorId>('healthcare');
-  const [rfqProduct, setRfqProduct] = useState<string>('');
   const [productFilter, setProductFilter] = useState<SectorId | 'all'>('all');
 
   // Initialize Lenis Smooth Scrolling Synchronized with GSAP
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      ScrollTrigger.refresh();
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -65,18 +68,6 @@ export default function App() {
     }
   };
 
-  const handleOpenRfqWithSector = (sectorId: SectorId) => {
-    setRfqSector(sectorId);
-    setRfqProduct('');
-    setRfqModalOpen(true);
-  };
-
-  const handleOpenRfqWithProduct = (productName: string, sectorId: SectorId) => {
-    setRfqSector(sectorId);
-    setRfqProduct(productName);
-    setRfqModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-[#0C0E14] text-[#F3F4F6] selection:bg-[#DFBA73] selection:text-[#0C0E14] relative">
       {/* 28 Custom Cursor (Desktop Only) */}
@@ -88,22 +79,13 @@ export default function App() {
       )}
 
       {/* 08 Navbar */}
-      <Navbar
-        onOpenRfqModal={() => {
-          setRfqProduct('');
-          setRfqModalOpen(true);
-        }}
-      />
+      <Navbar />
 
       {/* Main Page Layout */}
       <main id="main-content">
         {/* 06 Hero — The WOW Moment */}
         <Hero
           onExploreClick={handleExploreWorlds}
-          onOpenRfqModal={() => {
-            setRfqProduct('');
-            setRfqModalOpen(true);
-          }}
         />
 
         {/* 01 Company Story / Opening Manifesto */}
@@ -112,13 +94,11 @@ export default function App() {
         {/* 02 The Four Worlds: Healthcare, Frozen Foods, Pet Nutrition, Steel */}
         <FourWorldsSection
           onSelectSectorProducts={handleSelectSectorProducts}
-          onOpenRfqWithSector={handleOpenRfqWithSector}
         />
 
         {/* 03 Editorial Product Specifications Showcase */}
         <ProductsSection
           selectedSectorFilter={productFilter}
-          onOpenRfqWithProduct={handleOpenRfqWithProduct}
         />
 
         {/* 04 Global Maritime Trade Routes */}
@@ -134,24 +114,12 @@ export default function App() {
         <VisionSection />
 
         {/* 23 & 24 Final CTA ("LET'S CONNECT. BUILD THE NEXT GLOBAL SUPPLY CHAIN.") & Verified Contact Info */}
-        <ContactSection
-          onOpenRfqModal={() => {
-            setRfqProduct('');
-            setRfqModalOpen(true);
-          }}
-        />
+        <ContactSection />
       </main>
 
       {/* 25 Minimal Premium Footer */}
       <Footer />
 
-      {/* Interactive Export RFQ Modal */}
-      <InquiryModal
-        isOpen={rfqModalOpen}
-        onClose={() => setRfqModalOpen(false)}
-        initialSector={rfqSector}
-        initialProduct={rfqProduct}
-      />
     </div>
   );
 }

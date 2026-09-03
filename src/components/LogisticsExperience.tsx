@@ -24,7 +24,7 @@ const STAGES: StageItem[] = [
     headline: 'DIRECT ORIGIN CONVERGENCE',
     description: 'Contracted agricultural farming zones in Gujarat, vetted primary API chemical synthesizers, and blast-furnace metallurgical billet mills. We eliminate intermediaries at the source.',
     specs: ['Direct Contract Farming', 'cGMP Chemical Synthesizers', 'Certified Primary Steel Billets'],
-    image: '/images/warehouse.jpg',
+    image: '/Relexa_Product_Images/Aloo-Tikki.jpeg',
     tag: 'ORIGIN PROTOCOL'
   },
   {
@@ -34,7 +34,7 @@ const STAGES: StageItem[] = [
     headline: 'ZERO-DEFECT ASSAY & AUDIT',
     description: 'Triple-point chromatographic purity assay (HPLC/GC-MS), microbiological pathogen clearance, and ultrasonic non-destructive steel integrity inspection before production release.',
     specs: ['99.98% Chemical Purity Assays', 'ISO & BRCGS Grade AA Verification', 'EN 10204 3.1 Mill Inspection'],
-    image: '/images/pharmaceutical-lab.jpg',
+    image: '/Relexa_Product_Images/Fero-D3.jpeg',
     tag: 'LABORATORY GOVERNANCE'
   },
   {
@@ -44,7 +44,7 @@ const STAGES: StageItem[] = [
     headline: 'ENGINEERED VALUE ADDITION',
     description: 'Class 100 sterile cleanrooms for human dosages, -38°C fluidized IQF freezing tunnels for agricultural produce, and computer-calibrated heavy hydraulic roll forming for HR steel coils.',
     specs: ['Class 100 Sterile Cleanrooms', '-38°C Cryogenic Blast IQF', 'Hydraulic Tension Leveling'],
-    image: '/images/frozen-food.jpg',
+    image: '/Relexa_Product_Images/French-Fries-Crinkle.jpeg',
     tag: 'MANUFACTURING INTEGRATION'
   },
   {
@@ -54,7 +54,7 @@ const STAGES: StageItem[] = [
     headline: 'DEEP-WATER MARITIME DISPATCH',
     description: 'Seamless intermodal rail freight to Port Mundra & JNPT (Mumbai). Direct container stowage, real-time IoT reefer data-logging, and tamper-evident customs sealing.',
     specs: ['Port Mundra & JNPT Deep-Water Access', 'Continuous IoT Reefer Telemetry', 'Tamper-Evident Surveyor Seals'],
-    image: '/images/cargo-ship.jpg',
+    image: '/Relexa_Product_Images/HR-Coil.jpeg',
     tag: 'MARITIME ARTERY'
   },
   {
@@ -64,7 +64,7 @@ const STAGES: StageItem[] = [
     headline: 'GLOBAL GATEWAY RELEASE',
     description: 'Discharged across international ports with verified phytosanitary certificates, CTD pharmaceutical dossiers, and seamless customs clearance in 65+ destination countries.',
     specs: ['Full Regulatory Customs Cleared', 'Direct Distributor Handoff', '65+ Country Ingress Networks'],
-    image: '/images/hero-port.jpg',
+    image: '/Relexa_Product_Images/Dog-Treats.jpeg',
     tag: 'GLOBAL REACH'
   }
 ];
@@ -227,6 +227,8 @@ export const LogisticsExperience: React.FC = () => {
                 key={st.id}
                 src={st.image}
                 alt={st.name}
+                loading="lazy"
+                decoding="async"
                 className={`absolute inset-0 w-full h-full object-cover filter brightness-90 transition-all duration-500 transform ${
                   i === activeStageIndex
                     ? 'opacity-100 scale-100'
@@ -236,15 +238,15 @@ export const LogisticsExperience: React.FC = () => {
             ))}
 
             {/* Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E14] via-[#0C0E14]/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0C0E14]/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#090B10] via-[#090B10]/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#090B10]/60 via-transparent to-transparent" />
 
             {/* Bottom Meta Bar on Image */}
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
-              <div className="px-3 py-1.5 bg-[#0C0E14]/85 backdrop-blur-md border border-[#DFBA73]/40 text-[#DFBA73] font-mono text-[10px] sm:text-xs tracking-[0.16em] uppercase rounded-xs">
+              <div className="px-3 py-1.5 bg-[#090B10]/85 backdrop-blur-md border border-[#DFBA73]/40 text-[#DFBA73] font-mono text-[10px] sm:text-xs tracking-[0.16em] uppercase rounded-xs">
                 STAGE {currentStage.step} // {currentStage.tag}
               </div>
-              <div className="px-3 py-1.5 bg-[#0C0E14]/85 backdrop-blur-md border border-white/10 text-neutral-300 font-mono text-[10px] sm:text-xs tracking-wider rounded-xs">
+              <div className="px-3 py-1.5 bg-[#090B10]/85 backdrop-blur-md border border-white/10 text-neutral-300 font-mono text-[10px] sm:text-xs tracking-wider rounded-xs">
                 VERIFIED CONTINUUM
               </div>
             </div>

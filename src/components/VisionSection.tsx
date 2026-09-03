@@ -84,7 +84,7 @@ export const VisionSection: React.FC = () => {
 
         {/* Massive Statement with generous whitespace */}
         <div ref={textRef} className="mb-24 sm:mb-36">
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[9rem] font-display font-black tracking-tight uppercase leading-[0.9] text-[#FAF8F5]">
+          <h2 className="text-[clamp(2.4rem,8vw,9rem)] sm:text-[clamp(3rem,8vw,9rem)] font-display font-black tracking-tight uppercase leading-[0.9] text-[#FAF8F5]">
             EXPANDING
             <br />
             <span className="text-stroke hover:text-[#DFBA73] transition-colors duration-700">THE GLOBAL</span>
@@ -94,11 +94,13 @@ export const VisionSection: React.FC = () => {
         </div>
 
         {/* Slow Cinematic Parallax Photography Showcase */}
-        <div className="relative aspect-[21/9] w-full rounded-xs overflow-hidden border border-[#DFBA73]/30 mb-24 sm:mb-32 shadow-2xl bg-[#121522]">
+        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-xs overflow-hidden border border-[#DFBA73]/30 mb-24 sm:mb-32 shadow-2xl bg-[#121522]">
           <img
             ref={imageRef}
-            src="/images/cargo-ship.jpg"
+            src="/Relexa_Product_Images/HR-Coil.jpeg"
             alt="Relexa Exports Maritime Vessel"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-80"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C12] via-[#0A0C12]/30 to-transparent" />
@@ -129,7 +131,7 @@ export const VisionSection: React.FC = () => {
             {corePillars.map((pillar, idx) => (
               <div
                 key={pillar.title}
-                className="p-6 bg-[#111420]/60 border border-white/5 hover:border-[#DFBA73]/40 rounded-xs transition-all duration-300 flex flex-col justify-between group"
+                className="p-6 bg-[#121522]/60 border border-white/5 hover:border-[#DFBA73]/40 rounded-xs transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="text-xs font-mono text-[#DFBA73]/60 group-hover:text-[#DFBA73] mb-4 font-bold">

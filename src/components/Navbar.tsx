@@ -1,28 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Menu, X, ArrowUpRight, Globe, FileText } from 'lucide-react';
+import { Download, Menu, X, Globe, FileText } from 'lucide-react';
 import { RelexaLogo } from './RelexaLogo';
 
 interface NavbarProps {
   onOpenBrochureModal?: () => void;
-  onOpenRfqModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const isScrolled = window.scrollY > 40;
+      setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Body scroll locking and Escape key handling for mobile menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { label: 'COMPANY', href: '#company' },
@@ -88,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
               href="/relexa.pdf"
               download="Relexa-Exports-Brochure.pdf"
               id="nav-download-brochure-btn"
-              className="download-brochure-button group relative inline-flex items-center gap-2 px-4 py-2.5 text-[11px] font-mono tracking-[0.16em] uppercase text-[#0C0E14] bg-gradient-to-r from-[#F4DFB0] via-[#DFBA73] to-[#C8A25D] font-bold transition-all duration-300 hover:shadow-[0_0_20px_rgba(223,186,115,0.4)] hover:brightness-110 active:scale-95 rounded-xs"
+              className="download-brochure-button group relative inline-flex items-center gap-2 px-4 py-2.5 text-[11px] font-mono tracking-[0.16em] uppercase text-[#0C0E14] bg-gradient-to-r from-[#F4DFB0] via-[#DFBA73] to-[#DFBA73] font-bold transition-all duration-300 hover:shadow-[0_0_20px_rgba(223,186,115,0.4)] hover:brightness-110 active:scale-95 rounded-xs"
               title="Download Corporate Export Brochure (PDF)"
               aria-label="Download Relexa Exports brochure"
             >
@@ -96,18 +110,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
               <Download size={14} className="transition-transform group-hover:translate-y-0.5" />
             </a>
 
-            {/* Quick RFQ Quote Button */}
-            {onOpenRfqModal && (
-              <button
-                type="button"
-                onClick={onOpenRfqModal}
-                id="nav-request-rfq-btn"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-mono tracking-[0.14em] uppercase text-[#DFBA73] border border-[#DFBA73]/30 hover:border-[#DFBA73] hover:bg-[#DFBA73]/10 transition-all duration-300 rounded-sm"
-              >
-                <span>REQUEST RFQ</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </button>
-            )}
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -125,7 +127,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
               type="button"
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#F3F4F6] hover:text-[#DFBA73] focus:outline-none transition-colors"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu-drawer"
+              className="flex items-center justify-center w-11 h-11 text-[#F3F4F6] hover:text-[#DFBA73] focus:outline-none transition-colors rounded-sm"
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -138,9 +142,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
       {mobileMenuOpen && (
         <div
           id="mobile-menu-drawer"
-          className="fixed inset-0 z-40 bg-[#0C0E14]/98 backdrop-blur-xl flex flex-col justify-between pt-24 pb-10 px-8 lg:hidden animate-in fade-in duration-300"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
+          className="fixed inset-0 z-40 bg-[#0C0E14]/98 backdrop-blur-xl flex flex-col pt-24 pb-10 px-6 sm:px-8 lg:hidden animate-in fade-in duration-300 overflow-y-auto"
         >
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-6 min-h-full justify-between">
             <div className="text-[10px] font-mono text-[#DFBA73]/60 tracking-[0.25em] uppercase border-b border-[#DFBA73]/15 pb-3">
               NAVIGATION / SECTORS
             </div>
@@ -171,19 +178,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBrochureModal, onOpenRfqMo
               <Download className="w-4 h-4" />
               <span>DOWNLOAD BROCHURE (PDF)</span>
             </a>
-
-            {onOpenRfqModal && (
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenRfqModal();
-                }}
-                className="w-full py-3.5 border border-[#DFBA73]/40 text-[#DFBA73] font-mono text-xs tracking-[0.16em] uppercase rounded-sm"
-              >
-                REQUEST EXPORT INQUIRY (RFQ)
-              </button>
-            )}
 
             <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 pt-2">
               <span>AHMEDABAD, INDIA</span>

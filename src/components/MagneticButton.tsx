@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -20,7 +20,6 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   dataCursor = 'cta'
 }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!buttonRef.current) return;
@@ -36,11 +35,13 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     const clampedX = Math.max(-maxDistance, Math.min(maxDistance, deltaX));
     const clampedY = Math.max(-maxDistance, Math.min(maxDistance, deltaY));
 
-    setPosition({ x: clampedX, y: clampedY });
+    buttonRef.current.style.transform = `translate3d(${clampedX}px, ${clampedY}px, 0)`;
   };
 
   const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+    if (buttonRef.current) {
+      buttonRef.current.style.transform = 'translate3d(0, 0, 0)';
+    }
   };
 
   return (
@@ -53,9 +54,6 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       onMouseLeave={handleMouseLeave}
       data-cursor={dataCursor}
       className={`transition-transform duration-200 ease-out will-change-transform ${className}`}
-      style={{
-        transform: `translate3d(${position.x}px, ${position.y}px, 0)`
-      }}
     >
       {children}
     </button>

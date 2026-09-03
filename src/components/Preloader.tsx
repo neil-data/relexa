@@ -12,7 +12,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const lineRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     // Safety fallback timeout to prevent preloader from getting stuck
@@ -71,7 +70,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         duration: 1.4,
         ease: 'power2.inOut',
         onUpdate: () => {
-          setProgress(Math.round(progressObj.value));
+          if (counterRef.current) {
+            counterRef.current.textContent = `${Math.round(progressObj.value).toString().padStart(3, '0')}%`;
+          }
         }
       }, '-=0.8')
       // 5. Brief hold for luxury cinematic pacing
@@ -88,7 +89,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       });
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(safetyTimer);
+      ctx.revert();
+    };
   }, [onComplete]);
 
   return (
@@ -127,7 +131,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         >
           <span>FOUR WORLDS</span>
           <span ref={counterRef} className="text-[#F3F4F6] font-semibold">
-            {progress.toString().padStart(3, '0')}%
+            000%
           </span>
           <span>ONE STANDARD</span>
         </div>

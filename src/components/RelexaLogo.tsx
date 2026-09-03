@@ -31,7 +31,7 @@ export const RelexaLogo: React.FC<RelexaLogoProps> = ({
         <img
           src="/logo.png"
           alt="Relexa Exports Logo"
-          className={`${heightClass} w-auto object-contain rounded-xs drop-shadow-[0_2px_12px_rgba(223,186,115,0.3)] transition-transform duration-300 hover:scale-105`}
+          className={`${heightClass} w-auto object-contain rounded-lg drop-shadow-[0_2px_12px_rgba(223,186,115,0.3)] transition-transform duration-300 hover:scale-105`}
         />
       </div>
     );
@@ -43,7 +43,7 @@ export const RelexaLogo: React.FC<RelexaLogoProps> = ({
         <img
           src="/logo.png"
           alt="Relexa Exports Official Logo"
-          className={`${heightClass} w-auto object-contain rounded-xs drop-shadow-[0_4px_20px_rgba(223,186,115,0.35)] transition-transform duration-300 hover:scale-105`}
+          className={`${heightClass} w-auto object-contain rounded-lg drop-shadow-[0_4px_20px_rgba(223,186,115,0.35)] transition-transform duration-300 hover:scale-105`}
         />
       </div>
     );
@@ -55,7 +55,7 @@ export const RelexaLogo: React.FC<RelexaLogoProps> = ({
       <img
         src="/logo.png"
         alt="Relexa Exports"
-        className={`${heightClass} w-auto object-contain rounded-xs drop-shadow-[0_2px_10px_rgba(223,186,115,0.25)] transition-transform duration-300 hover:brightness-110`}
+        className={`${heightClass} w-auto object-contain rounded-lg drop-shadow-[0_2px_10px_rgba(223,186,115,0.25)] transition-transform duration-300 hover:brightness-110`}
       />
     </div>
   );

@@ -122,7 +122,7 @@ export const GlobalReachMap: React.FC = () => {
               <span ref={headlineLine1Ref} className="block overflow-hidden">
                 DELIVERING
               </span>
-              <span ref={headlineLine2Ref} className="block overflow-hidden text-[#1E2B47]">
+              <span ref={headlineLine2Ref} className="block overflow-hidden text-[#0C1222]">
                 EXCELLENCE
               </span>
               <span ref={headlineLine3Ref} className="block overflow-hidden text-[#8C6B1C]">
@@ -147,7 +147,7 @@ export const GlobalReachMap: React.FC = () => {
                 className="group inline-flex items-center gap-3 px-7 py-4 bg-[#0C1222] hover:bg-[#162036] text-[#FAF8F5] font-mono text-xs tracking-[0.2em] uppercase font-bold rounded-xs transition-all duration-300 shadow-md hover:shadow-xl active:scale-98 border border-[#0C1222]"
               >
                 <span>EXPLORE GLOBAL REACH</span>
-                <ArrowRight className="w-4 h-4 text-[#DFBA73] transition-transform group-hover:translate-x-1.5" />
+                <ArrowRight className="w-4 h-4 text-[#C8A25D] transition-transform group-hover:translate-x-1.5" />
               </button>
             </div>
 
@@ -171,6 +171,7 @@ export const GlobalReachMap: React.FC = () => {
                 src="/world_map.png"
                 alt="RelExa Exports global reach — world map"
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain"
               />
 

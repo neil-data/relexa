@@ -22,12 +22,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FourWorldsSectionProps {
   onSelectSectorProducts: (sectorId: SectorId) => void;
-  onOpenRfqWithSector: (sectorId: SectorId) => void;
 }
 
 export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
   onSelectSectorProducts,
-  onOpenRfqWithSector,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -41,8 +39,8 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
       subtitle: 'Precision Therapeutics & Dental Solutions',
       statement: 'QUALITY. PRECISION. INTEGRITY.',
       copy: 'Trusted medicines, healthcare solutions and dental care products designed around quality, reliability and better everyday care.',
-      heroImage: '/images/healthcare.jpg',
-      secondaryImage: '/images/pharmaceutical-lab.jpg',
+      heroImage: '/Relexa_Product_Images/Rabez-D.jpeg',
+      secondaryImage: '/Relexa_Product_Images/Devdent-D.jpeg',
       mood: 'CLEAN / PRECISE',
       atmosphere: 'linear-gradient(135deg, #0A1128 0%, #0C0E14 100%)',
       accentColor: '#DFBA73',
@@ -74,8 +72,8 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
       subtitle: 'IQF Agro-Produce & Gourmet Potato Innovations',
       statement: 'FRESHNESS.\nENGINEERED FOR\nGLOBAL MARKETS.',
       copy: 'Cultivated in fertile Indian agricultural heartlands and processed within hours of harvest at -38°C to lock in cellular crispness, natural moisture, and vital nutrients.',
-      heroImage: '/images/french-fries.jpg',
-      secondaryImage: '/images/frozen-food.jpg',
+      heroImage: '/Relexa_Product_Images/French-Fries-Straight-Cut.jpeg',
+      secondaryImage: '/Relexa_Product_Images/Coated-Flavoured-Fries.jpeg',
       mood: 'FRESH / ENERGETIC',
       atmosphere: 'linear-gradient(135deg, #1C1306 0%, #0C0E14 100%)',
       accentColor: '#E29A38',
@@ -99,8 +97,8 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
       subtitle: 'Complete Biological Nutrition & Functional Rewards',
       statement: 'BETTER NUTRITION.\nHAPPIER COMPANIONS.',
       copy: 'Formulated with veterinary nutritionists using human-grade single-source animal proteins and dehydrated real meat treats without artificial preservatives or cheap fillers.',
-      heroImage: '/images/pet-nutrition.jpg',
-      secondaryImage: '/images/dog-food.jpg',
+      heroImage: '/Relexa_Product_Images/Dog-Food.jpeg',
+      secondaryImage: '/Relexa_Product_Images/Cat-Food.jpeg',
       mood: 'WARM / ORGANIC',
       atmosphere: 'linear-gradient(135deg, #1A0D0D 0%, #0C0E14 100%)',
       accentColor: '#F59E0B',
@@ -125,8 +123,8 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
       subtitle: 'High-Yield Heavy Metallurgy & Structural Profiles',
       statement: 'BUILT FOR\nWHAT COMES NEXT.',
       copy: 'Heavy metallurgical exports manufactured for rigorous international civil engineering, shipbuilding, renewable infrastructure, and heavy mechanical fabrication.',
-      heroImage: '/images/steel.jpg',
-      secondaryImage: '/images/steel-coil.jpg',
+      heroImage: '/Relexa_Product_Images/HR-Coil.jpeg',
+      secondaryImage: '/Relexa_Product_Images/Flat-Bar.jpeg',
       mood: 'DARK / MONUMENTAL',
       atmosphere: 'linear-gradient(135deg, #10141D 0%, #06080C 100%)',
       accentColor: '#C4C8D6',
@@ -228,7 +226,7 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
               className={`flex items-center gap-2 px-3 py-1.5 rounded-xs border text-xs font-mono transition-all duration-300 cursor-pointer ${
                 activeWorldIndex === idx
                   ? 'bg-[#DFBA73] text-[#0C0E14] font-bold border-[#DFBA73] shadow-md scale-105'
-                  : 'bg-[#121522] text-neutral-400 border-white/5 hover:border-[#DFBA73]/40 hover:text-white'
+                  : 'bg-[#0E1119] text-neutral-400 border-white/5 hover:border-[#DFBA73]/40 hover:text-white'
               }`}
             >
               <span>{w.number}</span>
@@ -258,7 +256,7 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
             {/* Top Bar for this World */}
             <div className="flex items-center justify-between pb-6 border-b border-white/10 relative z-10">
               <div className="flex items-center gap-4">
-                <span className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-[#DFBA73] tracking-tighter">
+                <span className="text-[clamp(2rem,7vw,3.75rem)] sm:text-[clamp(2.4rem,6vw,3.75rem)] font-display font-black text-[#DFBA73] tracking-tighter">
                   {world.number}
                 </span>
                 <div>
@@ -309,7 +307,7 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
 
                     <div className="grid grid-cols-2 gap-3">
                       {world.techSpecs.map((spec) => (
-                        <div key={spec.label} className="p-2.5 bg-[#121522] border border-white/5 rounded-xs">
+                        <div key={spec.label} className="p-2.5 bg-[#0E1119] border border-white/5 rounded-xs">
                           <div className="text-[10px] font-mono text-neutral-400 uppercase">
                             {spec.label}
                           </div>
@@ -339,6 +337,8 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
                   <img
                     src={world.heroImage}
                     alt={world.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = world.secondaryImage;
@@ -389,13 +389,6 @@ export const FourWorldsSection: React.FC<FourWorldsSectionProps> = ({
                   className="flex-1 sm:flex-none px-4 py-2.5 bg-[#DFBA73] text-[#0C0E14] font-mono text-xs font-bold tracking-[0.14em] uppercase rounded-xs shadow-md"
                 >
                   VIEW ALL {world.title.replace('\n', ' ')}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onOpenRfqWithSector(world.id)}
-                  className="flex-1 sm:flex-none px-4 py-2.5 border border-[#DFBA73]/40 hover:bg-[#DFBA73]/10 text-[#DFBA73] font-mono text-xs tracking-[0.14em] uppercase rounded-xs transition-colors"
-                >
-                  REQUEST RFQ
                 </button>
               </div>
             </div>

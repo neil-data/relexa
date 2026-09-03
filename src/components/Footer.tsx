@@ -5,7 +5,6 @@ import { RelexaLogo } from './RelexaLogo';
 
 interface FooterProps {
   onOpenBrochureModal?: () => void;
-  onOpenRfqModal?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = () => {
@@ -78,7 +77,7 @@ export const Footer: React.FC<FooterProps> = () => {
               download="Relexa-Exports-Brochure.pdf"
               data-cursor="cta"
               aria-label="Download Relexa Exports brochure"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#DFBA73]/10 hover:bg-[#DFBA73] border border-[#DFBA73]/30 text-[#DFBA73] hover:text-[#0C0E14] font-mono text-xs tracking-[0.16em] uppercase font-bold rounded-xs transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#DFBA73]/10 hover:bg-[#DFBA73] border border-[#DFBA73]/30 text-[#DFBA73] hover:text-[#FAF8F5] font-mono text-xs tracking-[0.16em] uppercase font-bold rounded-xs transition-all"
             >
               <span>DOWNLOAD BROCHURE</span>
               <Download className="w-3.5 h-3.5" />

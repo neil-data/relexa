@@ -52,7 +52,7 @@ export const QualityStandards: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black tracking-tight uppercase leading-[0.95] text-[#FAF8F5]">
+          <h2 className="text-[clamp(2rem,7vw,7rem)] sm:text-[clamp(2.4rem,6.5vw,8rem)] font-display font-black tracking-tight uppercase leading-[0.95] text-[#F3F4F6]">
             QUALITY IS NOT
             <br />
             <span className="text-stroke hover:text-[#DFBA73] transition-colors duration-500">A DEPARTMENT.</span>
@@ -60,7 +60,7 @@ export const QualityStandards: React.FC = () => {
             <span className="gold-gradient-text">IT IS THE STANDARD.</span>
           </h2>
 
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs font-mono text-neutral-400">
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs font-mono text-[#A3AABF]">
             <span>CERTIFIED LABORATORY ASSAYS • COLD-CHAIN LOCKING • METALLURGICAL MILL TESTS</span>
             <span className="text-[#DFBA73]">ZERO DEFECT GOVERNANCE</span>
           </div>
@@ -73,11 +73,11 @@ export const QualityStandards: React.FC = () => {
               <div className="text-[10px] font-mono tracking-[0.25em] text-[#DFBA73] uppercase mb-1">
                 ZERO-DEFECT PIPELINE
               </div>
-              <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#FAF8F5]">
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#F3F4F6]">
                 4-Stage Technical Validation Protocol
               </h3>
             </div>
-            <p className="text-xs text-neutral-400 font-sans font-light max-w-sm">
+            <p className="text-xs text-[#A3AABF] font-sans font-light max-w-sm">
               Every export consignment is validated through end-to-end laboratory and physical inspection before departure.
             </p>
           </div>
@@ -86,15 +86,15 @@ export const QualityStandards: React.FC = () => {
             {auditStages.map((stage) => (
               <div
                 key={stage.step}
-                className="p-6 bg-[#131622] border border-white/5 rounded-xs relative group hover:border-[#DFBA73]/40 transition-colors"
+                className="p-6 bg-[#0E1119] border border-white/5 rounded-xs relative group hover:border-[#DFBA73]/40 transition-colors"
               >
                 <div className="text-3xl font-display font-extrabold text-[#DFBA73]/40 group-hover:text-[#DFBA73] transition-colors mb-3">
                   {stage.step}
                 </div>
-                <h4 className="text-base font-display font-bold text-[#FAF8F5] mb-2">
+                <h4 className="text-base font-display font-bold text-[#F3F4F6] mb-2">
                   {stage.name}
                 </h4>
-                <p className="text-xs text-[#9DA3B4] font-sans font-light leading-relaxed">
+                <p className="text-xs text-[#A3AABF] font-sans font-light leading-relaxed">
                   {stage.desc}
                 </p>
               </div>
@@ -113,7 +113,7 @@ export const QualityStandards: React.FC = () => {
             {CERTIFICATIONS_LIST.map((cert) => (
               <div
                 key={cert.code}
-                className="p-6 sm:p-8 bg-[#121522] border border-[#DFBA73]/20 hover:border-[#DFBA73]/60 transition-all duration-300 rounded-xs flex flex-col justify-between group"
+                className="p-6 sm:p-8 bg-[#0E1119] border border-[#DFBA73]/20 hover:border-[#DFBA73]/60 transition-all duration-300 rounded-xs flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -123,11 +123,11 @@ export const QualityStandards: React.FC = () => {
                     <Award className="w-5 h-5 text-[#DFBA73]/50 group-hover:text-[#DFBA73] transition-colors" />
                   </div>
 
-                  <h3 className="text-lg font-display font-bold text-[#FAF8F5] mb-1">
+                  <h3 className="text-lg font-display font-bold text-[#F3F4F6] mb-1">
                     {cert.name}
                   </h3>
                   <div className="text-[11px] font-mono text-[#DFBA73]/80 uppercase mb-3">
-                    {cert.authority} • <span className="text-neutral-400">{cert.sector}</span>
+                    {cert.authority} • <span className="text-[#A3AABF]">{cert.sector}</span>
                   </div>
                   <p className="text-xs text-[#A3AABF] font-sans font-light leading-relaxed">
                     {cert.description}
@@ -139,7 +139,7 @@ export const QualityStandards: React.FC = () => {
                     <Check className="w-3.5 h-3.5" />
                     AUDIT COMPLIANT
                   </span>
-                  <span className="text-neutral-500 font-sans text-[10px]">Annual Verification</span>
+                  <span className="text-[#A3AABF] font-sans text-[10px]">Annual Verification</span>
                 </div>
               </div>
             ))}

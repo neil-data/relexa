@@ -140,3 +140,115 @@
   background-size: 24px 24px;
 }
 
+/* ============================================================
+   RESPONSIVE / MOBILE FOUNDATION
+   ============================================================ */
+
+/* Global overflow & box-sizing guards */
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Make all media fluid inside their containers.
+   NOTE: This must live in @layer base so that Tailwind utility height/width
+   classes (e.g. h-11, h-full, w-auto) take precedence. An unlayered
+   `img { height: auto }` here was overriding every utility height on
+   <img> elements, which blew the header logo up to ~500px (the "giant
+   logo overlay" regression). */
+@layer base {
+  img,
+  video,
+  svg,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Fluid typography for section display headings */
+.text-hero-fluid {
+  font-size: clamp(2.8rem, 9vw, 9rem) !important;
+  line-height: 0.9;
+}
+
+.text-section-fluid {
+  font-size: clamp(2rem, 7vw, 6.5rem) !important;
+  line-height: 0.95;
+}
+
+/* Base tabular/fluid display scale via clamp */
+h1, h2, h3 {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+p, li, span, a {
+  overflow-wrap: break-word;
+}
+
+/* Minimum comfortable touch target for interactive elements */
+button,
+a,
+[role="button"],
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Laptop: 1024px - 1279px */
+@media (max-width: 1279px) {
+  .text-section-fluid {
+    font-size: clamp(1.9rem, 6.5vw, 5.5rem) !important;
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (max-width: 1023px) {
+  .text-hero-fluid {
+    font-size: clamp(2.4rem, 8vw, 5.5rem) !important;
+  }
+
+  .hero-stack {
+    padding-top: 6rem;
+  }
+}
+
+/* Mobile: 480px - 767px */
+@media (max-width: 767px) {
+  .text-hero-fluid {
+    font-size: clamp(2rem, 9vw, 3.2rem) !important;
+    line-height: 0.92;
+  }
+
+  .text-section-fluid {
+    font-size: clamp(1.6rem, 7vw, 2.6rem) !important;
+  }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 479px) {
+  .text-hero-fluid {
+    font-size: clamp(1.7rem, 9.5vw, 2.5rem) !important;
+  }
+}
+
+/* Hide custom cursor on touch / tablet / mobile screens */
+@media (max-width: 1023px), (hover: none), (pointer: coarse) {
+  .relexa-cursor {
+    display: none !important;
+  }
+}
+
